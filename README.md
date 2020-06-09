@@ -1,2 +1,0 @@
-# TBC
-Tong Bao Coin
