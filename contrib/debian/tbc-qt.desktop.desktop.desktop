@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=TBC
+Comment=TBC P2P Cryptocurrency
+Exec=tbc-qt %u
+Terminal=false
+Type=Application
+Icon=tbc128
+MimeType=x-scheme-handler/tbc;
+Categories=Office;Finance;
+Name[zh_CN]=tbc-qt.desktop.desktop
