@@ -16,7 +16,7 @@ Tong Bao Coin will serve as the underlying foundation of the blockchain to provi
 
 ### Total Supply
 
-73,000,000 (~4 years)
+203,000,000 (~4 years)
 
 ### Masternode Collateral
 
@@ -36,7 +36,7 @@ NeoScrypt
 
 | **PoW Phase Period**        | **PoS Phase Period**  |
 | --------   | -----  |
-| Masternodes: 70%, Miners: 30%      | Masternodes: 80%, PoS: 20%   |
+| Masternodes: 90%, Miners: 10%      | Masternodes: 80%, PoS: 20%   |
 | [block# 1] 7,000,000  (Premined)     |[block# 23601-300000] 100   |
 | [block# 2-2000] 1    |[block# 300001-1000000] 50|
 | [block# 2001-23600] 100 |[block# 1000001-2000000] 25 |
