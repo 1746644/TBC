@@ -2212,7 +2212,7 @@ int64_t GetBlockValue(int nHeight)
             nSubsidy = 100 * COIN;
         } else if (nHeight < 10000 && nHeight >= 3000) {
             nSubsidy = 50 * COIN;
-        } else if (nHeight < 20000 && nHeight >= 10000) {
+        } else if (nHeight < 5000 && nHeight >= 10000) {
             nSubsidy = 25 * COIN;
         } else if (nHeight < 30000 && nHeight >= 20000) {
             nSubsidy = 12.5 * COIN;
@@ -2236,11 +2236,11 @@ int64_t GetBlockValue(int nHeight)
     }
     else if (nHeight <  Params().LAST_POW_BLOCK()  && nHeight > 1) {
         nSubsidy = 1 * COIN;
-    } else if (nHeight < 270000 && nHeight >= Params().LAST_POW_BLOCK() ) {
+    } else if (nHeight < 1000000 && nHeight >= Params().LAST_POW_BLOCK() ) {
         nSubsidy = 10 * COIN;
-    } else if (nHeight < 810000 && nHeight >= 270000) {
+    } else if (nHeight < 2000000 && nHeight >= 1000000) {
         nSubsidy = 5 * COIN;
-    } else if (nHeight < 1620000 && nHeight >= 810000) {
+    } else if (nHeight < 3000000 && nHeight >= 2000000) {
         nSubsidy = 2.5 * COIN;
     } else {
         nSubsidy = 1.25 * COIN;
@@ -2286,9 +2286,9 @@ if(nMasternodeCount==0)
      if (nHeight < 1) {
         ret = 0;
     } else if (nHeight < Params().LAST_POW_BLOCK() && nHeight >= 1) {
-        ret = blockValue * 90 / 100 / nMasternodeCount;
+        ret = blockValue * 99 / 100 / nMasternodeCount;
     } else if (nHeight >= Params().LAST_POW_BLOCK()) {
-        ret = blockValue * 90 / 100 / nMasternodeCount;
+        ret = blockValue * 99 / 100 / nMasternodeCount;
     }
 
     return ret;
@@ -2320,9 +2320,9 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
      if (nHeight < 1) {
         ret = 0;
     } else if (nHeight < Params().LAST_POW_BLOCK() && nHeight >= 1) {
-        ret = blockValue * 90 / 100;
+        ret = blockValue * 99 / 100;
     } else if (nHeight >= Params().LAST_POW_BLOCK()) {
-        ret = blockValue * 90 / 100;
+        ret = blockValue * 99 / 100;
     }
 
     return ret;
@@ -5254,8 +5254,8 @@ bool InitBlockIndex()
         try {
                 CBlock& block = const_cast<CBlock&>(Params().GenesisBlock());
 
-
 /*
+
               uint256 bnTarget;
                 bool fNegative;
                 bool fOverflow;
@@ -5283,8 +5283,8 @@ bool InitBlockIndex()
                     LogPrintf("hashMerkleRoot******** %s\n", block.hashMerkleRoot.ToString());
                     }
 
-
 */
+
 
 // Start new block file
             unsigned int nBlockSize = ::GetSerializeSize(block, SER_DISK, CLIENT_VERSION);

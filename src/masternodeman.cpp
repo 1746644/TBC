@@ -608,7 +608,7 @@ CMasternode* CMasternodeMan::GetCurrentMasterNode(int mod, int64_t nBlockHeight,
         // calculate the score for each Masternode
         uint256 n = mn.CalculateScore(mod, nBlockHeight);
         int64_t n2 = n.GetCompact(false);
-        if(vwinners.size()<=20)
+        if(vwinners.size()<=50)
         {
 
             vwinners.insert(make_pair(n2,mn));

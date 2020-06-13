@@ -289,7 +289,7 @@ public:
 
         // Stake Settings
         nHashDrift = 45;
-        nStakeSplitThreshold = 20000;
+        nStakeSplitThreshold = 5000;
         nHashInterval = 22;
         nStakeSetUpdateTime = 300; // 5 minutes
 
@@ -1041,7 +1041,7 @@ public:
     {
         BOOST_FOREACH (CAmount d, obfuScationDenominations)
             if (tx->vout[i].nValue == d) return 10000;
-        if (tx->vout[i].nValue < 1 * COIN) return 20000;
+        if (tx->vout[i].nValue < 1 * COIN) return 5000;
 
         //nondenom return largest first
         return -(tx->vout[i].nValue / COIN);

@@ -1772,7 +1772,7 @@ Address: %4
         <translation>新增/編輯通宝幣節點</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter an Alias (friendly name) for your Master Node and its address (either clearnet IP and port or Tor onion address and port). The address should be in the format 123.456.789.123:62222 or asdfghjk.onion:62222. You must send exactly 20000 IC to the collateral address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter an Alias (friendly name) for your Master Node and its address (either clearnet IP and port or Tor onion address and port). The address should be in the format 123.456.789.123:62222 or asdfghjk.onion:62222. You must send exactly 5000 IC to the collateral address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;輸入主節點的別名（好記的名字)和地址（既可以是IP和端口,也可以是暗網地址和端口），地址應該是格式123.566.789.123:62222或asdfghjk.onion:62222:62222。抵押地址錢包中應正好有20000個幣。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -1816,7 +1816,7 @@ Address: %4
         <translation>輸入主節點私鑰</translation>
     </message>
     <message>
-        <source>Enter 20000 IC TXID</source>
+        <source>Enter 5000 IC TXID</source>
         <translation>輸入有20000個幣的TX哈希</translation>
     </message>
     <message>
@@ -1841,7 +1841,7 @@ Address: %4
         <translation>請輸入壹個主節點私鑰，該參數可在終端下通過\"masternode genkey\"命令獲取</translation>
     </message>
     <message>
-        <source>Please enter the transaction hash for the transaction that has 20000 coins</source>
+        <source>Please enter the transaction hash for the transaction that has 5000 coins</source>
         <translation>請輸入壹個交易哈希，該哈希正好還有20000個幣</translation>
     </message>
     <message>

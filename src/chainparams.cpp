@@ -54,7 +54,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    ( 0, uint256("0x0000021af839e06c17c10b545dd97ac0576d93d9ba17a904b9d28e956048eb6b"));
+    ( 0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
     /*
     (0, uint256("0x0000094d510b11b1b902e77b10f793a2b43ad81d1db9884f1ef26c773711965f"))
     (1, uint256("0x00000dd955900a094ae8b426b4b0839ec3af15bc8547932618b7152dc570c66d"))
@@ -64,22 +64,22 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1591777674, // * UNIX timestamp of last checkpoint block
+    1592010553, // * UNIX timestamp of last checkpoint block
     78164,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
-    boost::assign::map_list_of(0, uint256("0x0000021af839e06c17c10b545dd97ac0576d93d9ba17a904b9d28e956048eb6b"));
+    boost::assign::map_list_of(0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1591777674,
+    1592010553,
     0,
     250};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
-    boost::assign::map_list_of(0, uint256("0x0000021af839e06c17c10b545dd97ac0576d93d9ba17a904b9d28e956048eb6b"));
+    boost::assign::map_list_of(0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
     1591583393,
@@ -107,11 +107,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x41;
-        pchMessageStart[1] = 0xc2;
-        pchMessageStart[2] = 0xf3;
-        pchMessageStart[3] = 0xe4;
-        vAlertPubKey = ParseHex("04009b60adcb2dd810e1546f0af940401e0c379f714577d35905cc7f8c8cf623474159620a8fcbaecf8278e2120e35d0abb0175276fcac91eec40ca20ddc2f7c75");
+        pchMessageStart[0] = 0x71;
+        pchMessageStart[1] = 0x52;
+        pchMessageStart[2] = 0xe3;
+        pchMessageStart[3] = 0xea;
+        vAlertPubKey = ParseHex("04e10cdf6822c8afeb688529bed34e748cff92bb1ec2a120180580445aaaf24a5c6d698e83f88ebd1cb8dda4e4f58d5ca13f12858dd6397209c0da4c947e26a499");
         nDefaultPort = 62222;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // TBC starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 21000000;
@@ -132,10 +132,10 @@ public:
 
         /** Height or Time Based Activations **/
      //   nLastPOWBlock = 23600;
-        nLastPOWBlock=2000;
+        nLastPOWBlock=200;
         nModifierUpdateBlock = 0;
-        nZerocoinStartHeight = 2001;
-        nZerocoinStartTime = 1591777674; // 
+        nZerocoinStartHeight = 201;
+        nZerocoinStartTime = 1592018553; // 
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
         nBlockRecalculateAccumulators = INT_MAX; //Trigger a recalculation of accumulators
         nBlockFirstFraudulent = INT_MAX; //First block that bad serials emerged
@@ -152,25 +152,25 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "10 June 2020, Tong Bao Coin is coming,COVID-19 Confirmed 7,238,768 people Jun 10 at 4:18 PM";
+        const char* pszTimestamp = "08:41 13 June 2020, Tong Bao Coin is coming,COVID-19 Confirmed 7,573,699 people Updated Jun 13 at 8:32 AM local";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 250 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04f2377c0de09af6a9d93fdc3a570d25abf67871961b1305798b42ab910f9e468c97bbc60cbb17edc9228991fb71f9b13a6229b4843677cf359cf19539d4dd86b2") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04a898195d6315d28648bfb39d152999867073e6a95902e93b8e0f21be440d1dd25be9a2043447a39fbd8f65e343645c07b206a2d34dfe4d725de7955d4500ed66") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1591777674;
+        genesis.nTime = 1592010553;
         //genesis.nBits = 0x1e0ffff0;
         genesis.nBits =0x1e0ffff0;
-        genesis.nNonce = 376966;
+        genesis.nNonce = 566251;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000021af839e06c17c10b545dd97ac0576d93d9ba17a904b9d28e956048eb6b"));
-        assert(genesis.hashMerkleRoot == uint256("0x7ad7685a0aa2698df5cd8a8f1dd958018bf6fbfa935868175003817802a2fbb6"));
+        assert(hashGenesisBlock == uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
+        assert(genesis.hashMerkleRoot == uint256("0xff4cf7af5671dfe5bce1d1989ca8686c3518b5eb372caa7335b06af5e3948ea0"));
 
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.tbc.kim"));
         vSeeds.push_back(CDNSSeedData("seed2", "seed2.tbc.kim"));
@@ -241,7 +241,7 @@ public:
         pchMessageStart[1] = 0x76;
         pchMessageStart[2] = 0x67;
         pchMessageStart[3] = 0xb8;
-        vAlertPubKey = ParseHex("0433e5610155e27905052fb0da7521898434ae0fe686852aa9419d67a3dd5996de8aba5738ebad48cd46f6b9541bbf4c086c3d2f344f8d1ec8fc1b5a94248fb37d");
+        vAlertPubKey = ParseHex("04081df6111f7d347987706f5b48747f772f11e35d7c523f9b6631952b0328531fab0d14d1310fd40f4b2bb434bd2d4e91cf01f2cfbd8e323e40471272d6afc731");
         nDefaultPort = 62224;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
