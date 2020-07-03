@@ -41,20 +41,35 @@ bool CMasternodeSync::IsBlockchainSynced()
         fBlockchainSynced = false;
     }
     lastProcess = GetTime();
-
+LogPrint("masternode", "IsBlockchainSynced == false  lastProcess:%lld \r\n",lastProcess);
     if (fBlockchainSynced) return true;
 
-    if (fImporting || fReindex) return false;
+    if (fImporting || fReindex)
+    {
+        LogPrint("masternode", "IsBlockchainSynced == false  01 \r\n");
+         return false;
+    }
 
     TRY_LOCK(cs_main, lockMain);
-    if (!lockMain) return false;
+    if (!lockMain) 
+    {
+          LogPrint("masternode", "IsBlockchainSynced == false  02 \r\n");
+        return false;
+    }
 
     CBlockIndex* pindex = chainActive.Tip();
-    if (pindex == NULL) return false;
+    if (pindex == NULL)
+    {
+         LogPrint("masternode", "IsBlockchainSynced == false  03 \r\n");
+         return false;
+    }
 
-
-    if (pindex->nTime + 60 * 60 < GetTime())
+LogPrint("masternode", "IsBlockchainSynced == false  pindex->nTime :%lld \r\n",pindex->nTime );
+    if (pindex->nTime + 24*60 * 60 < GetTime())
+    {
+         LogPrint("masternode", "IsBlockchainSynced == false  04 \r\n");
         return false;
+    }
 
     fBlockchainSynced = true;
 
@@ -260,11 +275,25 @@ void CMasternodeSync::Process()
 
     // sporks synced but blockchain is not, wait until we're almost at a recent block to continue
     if (Params().NetworkID() != CBaseChainParams::REGTEST &&
-        !IsBlockchainSynced() && RequestedMasternodeAssets > MASTERNODE_SYNC_SPORKS) return;
+        !IsBlockchainSynced() && RequestedMasternodeAssets > MASTERNODE_SYNC_SPORKS) {
+
+                if(!IsBlockchainSynced())
+                {
+                        LogPrint("masternode", "IsBlockchainSynced == false");
+
+                }
+            LogPrint("masternode", "sporks synced but blockchain is not, wait until we're almost at a recent block to continue\n");
+            return;
+        }
 
     TRY_LOCK(cs_vNodes, lockRecv);
-    if (!lockRecv) return;
+    if (!lockRecv){
 
+    return;
+
+    LogPrint("masternode", "lockRecv == false");
+    }
+     LogPrint("masternode", "vNodes size :%d",vNodes.size());
     BOOST_FOREACH (CNode* pnode, vNodes) {
         if (Params().NetworkID() == CBaseChainParams::REGTEST) {
             if (RequestedMasternodeAttempt <= 2) {
@@ -296,6 +325,8 @@ void CMasternodeSync::Process()
         }
 
         if (pnode->nVersion >= masternodePayments.GetMinMasternodePaymentsProto()) {
+             LogPrint("masternode", "pnode->nVersion %d",pnode->nVersion);
+
             if (RequestedMasternodeAssets == MASTERNODE_SYNC_LIST) {
                 LogPrint("masternode", "CMasternodeSync::Process() - lastMasternodeList %lld (GetTime() - MASTERNODE_SYNC_TIMEOUT) %lld\n", lastMasternodeList, GetTime() - MASTERNODE_SYNC_TIMEOUT);
                 if (lastMasternodeList > 0 && lastMasternodeList < GetTime() - MASTERNODE_SYNC_TIMEOUT * 2 && RequestedMasternodeAttempt >= MASTERNODE_SYNC_THRESHOLD) { //hasn't received a new item in the last five seconds, so we'll move to the

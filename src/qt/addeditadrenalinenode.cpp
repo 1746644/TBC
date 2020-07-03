@@ -30,7 +30,7 @@ AddEditAdrenalineNode::AddEditAdrenalineNode(QWidget *parent) :
     ui->aliasLineEdit->setPlaceholderText(tr("Enter Masternode alias"));
     ui->addressLineEdit->setPlaceholderText(tr("Enter Masternode IP And port"));
     ui->privkeyLineEdit->setPlaceholderText(tr("Enter Masternode private key"));
-    ui->txhashLineEdit->setPlaceholderText(tr("Enter 5000 IC TXID"));
+    ui->txhashLineEdit->setPlaceholderText(tr("Enter 2000 IC TXID"));
     ui->outputindexLineEdit->setPlaceholderText(tr("Enter transaction output index"));
 }
 
@@ -49,7 +49,7 @@ void AddEditAdrenalineNode::on_okButton_clicked()
     }
     else if(ui->addressLineEdit->text() == "")
     {
-        QMessageBox::warning(this, tr("Warning"), tr("Please enter an ip address and port. (123.45.67.89:62222)"), QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Warning"), tr("Please enter an ip address and port. (123.45.67.89:62225)"), QMessageBox::Ok);
         return;
     }
     else if(ui->privkeyLineEdit->text() == "")
@@ -59,7 +59,7 @@ void AddEditAdrenalineNode::on_okButton_clicked()
     }
     else if(ui->txhashLineEdit->text() == "")
     {
-        QMessageBox::warning(this, tr("Warning"), tr("Please enter the transaction hash for the transaction that has 5000 coins"), QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Warning"), tr("Please enter the transaction hash for the transaction that has 2000 coins"), QMessageBox::Ok);
         return;
     }
     else if(ui->outputindexLineEdit->text() == "")

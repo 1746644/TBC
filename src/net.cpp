@@ -436,6 +436,7 @@ CNode* ConnectNode(CAddress addrConnect, const char* pszDest, bool obfuScationMa
 
         return pnode;
     } else if (!proxyConnectionFailed) {
+         LogPrintf("If connecting to the node failed, and failure is not caused by a problem connecting to");
         // If connecting to the node failed, and failure is not caused by a problem connecting to
         // the proxy, mark this as an attempt.
         addrman.Attempt(addrConnect);

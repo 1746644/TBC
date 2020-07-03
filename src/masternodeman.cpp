@@ -799,7 +799,10 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         int nDoS = 0;
         if (!mnb.CheckAndUpdate(nDoS)) {
             if (nDoS > 0)
+            {
+                    LogPrintf(" Misbehaving nDoS ===1 03");
                 Misbehaving(pfrom->GetId(), nDoS);
+            }
 
             //failed
             return;
@@ -823,7 +826,10 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
             LogPrint("masternode","mnb - Rejected Masternode entry %s\n", mnb.vin.prevout.hash.ToString());
 
             if (nDoS > 0)
+            {
+                LogPrintf(" Misbehaving nDoS ===1 04");
                 Misbehaving(pfrom->GetId(), nDoS);
+            }
         }
     }
 
@@ -840,6 +846,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         if (mnp.CheckAndUpdate(nDoS)) return;
 
         if (nDoS > 0) {
+                LogPrintf(" Misbehaving nDoS ===1 05");
             // if anything significant failed, mark that node
             Misbehaving(pfrom->GetId(), nDoS);
         } else {
@@ -982,8 +989,8 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         }
 
         if (Params().NetworkID() == CBaseChainParams::MAIN) {
-            if (addr.GetPort() != 62222) return;
-        } else if (addr.GetPort() == 62222)
+            if (addr.GetPort() != 62225) return;
+        } else if (addr.GetPort() == 62225)
             return;
 
         //search existing Masternode list, this is where we update existing Masternodes with new dsee broadcasts
@@ -1043,7 +1050,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
 
         CValidationState state;
         CMutableTransaction tx = CMutableTransaction();
-        CTxOut vout = CTxOut(9999.99 * COIN, obfuScationPool.collateralPubKey);
+        CTxOut vout = CTxOut(999.99 * COIN, obfuScationPool.collateralPubKey);
         tx.vin.push_back(vin);
         tx.vout.push_back(vout);
 
@@ -1112,7 +1119,10 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                 LogPrint("masternode","dsee - %s from %i %s was not accepted into the memory pool\n", tx.GetHash().ToString().c_str(),
                     pfrom->GetId(), pfrom->cleanSubVer.c_str());
                 if (nDoS > 0)
+                {
+                     LogPrintf(" Misbehaving nDoS ===1 06");
                     Misbehaving(pfrom->GetId(), nDoS);
+                }
             }
         }
     }

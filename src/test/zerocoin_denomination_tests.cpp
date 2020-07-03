@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(amount_to_denomination_test)
     BOOST_CHECK_MESSAGE(AmountToZerocoinDenomination(amount) == ZQ_ONE, "For COIN denomination should be ZQ_ONE");
 
     //valid amount (max edge)
-    CAmount amount1 = 5000 * COIN;
+    CAmount amount1 = 2000 * COIN;
     BOOST_CHECK_MESSAGE(AmountToZerocoinDenomination(amount1) == ZQ_FIVE_THOUSAND, "For 5000*COIN denomination should be ZQ_ONE");
 
     //invalid amount (too much)

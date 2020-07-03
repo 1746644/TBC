@@ -57,8 +57,8 @@ NeoScrypt
 
 ### Ports
 
-+ rpc port= 62223
-+ p2p port= 62222
-+ Testnet rpc port= 62225
-+ Testnet p2p port = 62224
++ rpc port= 62226
++ p2p port= 62225
++ Testnet rpc port= 62228
++ Testnet p2p port = 62227
 

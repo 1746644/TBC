@@ -5487,7 +5487,7 @@ for example: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
     </message>
     <message>
         <location filename="../tbcstrings.cpp" line="228"/>
-        <source>(62222 could be used only on mainnet)</source>
+        <source>(62225 could be used only on mainnet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5502,7 +5502,7 @@ for example: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
     </message>
     <message>
         <location filename="../tbcstrings.cpp" line="231"/>
-        <source>(must be 62222 for mainnet)</source>
+        <source>(must be 62225 for mainnet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

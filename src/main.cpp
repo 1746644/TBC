@@ -2230,7 +2230,7 @@ int64_t GetBlockValue(int nHeight)
     }
 
     if (nHeight == 0) {
-        nSubsidy = 1 * COIN;
+        nSubsidy = 250 * COIN;
     } else if (nHeight == 1) {
         nSubsidy = 200000000 * COIN;
     }
@@ -2279,10 +2279,10 @@ int64_t GetMasternodePaymentA(int nHeight, int64_t blockValue, int nMasternodeCo
         ret = blockValue * 80 / 100;
     }
 */
-if(nMasternodeCount==0)
-{
-    return ret;
-}
+    if(nMasternodeCount==0)
+    {
+        return ret;
+    }
      if (nHeight < 1) {
         ret = 0;
     } else if (nHeight < Params().LAST_POW_BLOCK() && nHeight >= 1) {
@@ -2460,7 +2460,10 @@ void static InvalidBlockFound(CBlockIndex* pindex, const CValidationState& state
             CBlockReject reject = {state.GetRejectCode(), state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), pindex->GetBlockHash()};
             State(it->second)->rejects.push_back(reject);
             if (nDoS > 0)
+            {
+                  LogPrintf("InvalidBlockFound Misbehaving nDoS =%d\n",nDoS);
                 Misbehaving(it->second, nDoS);
+            }
         }
     }
     if (!state.CorruptionPossible()) {
@@ -4880,7 +4883,10 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
                 int nDoS = 0;
                 if (state.IsInvalid(nDoS)) {
                     if (nDoS > 0)
+                    {
+                        LogPrintf("InvalidBlockFound Misbehaving nDoS =%d\n",nDoS);
                         Misbehaving(pfrom->GetId(), nDoS);
+                    }
                     nodeStatus = false;
                 }
                 if(!nodeStatus)
@@ -5254,8 +5260,8 @@ bool InitBlockIndex()
         try {
                 CBlock& block = const_cast<CBlock&>(Params().GenesisBlock());
 
-/*
 
+/*
               uint256 bnTarget;
                 bool fNegative;
                 bool fOverflow;
@@ -5923,6 +5929,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         // Each connection can only send one version message
         if (pfrom->nVersion != 0) {
             pfrom->PushMessage("reject", strCommand, REJECT_DUPLICATE, string("Duplicate version message"));
+            LogPrintf("ProcessMessage strCommand == version Misbehaving 1 ");
             Misbehaving(pfrom->GetId(), 1);
             return false;
         }
@@ -6039,6 +6046,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
 
     else if (pfrom->nVersion == 0) {
+        LogPrintf("ProcessMessage pfrom->nVersion == 0 Misbehaving 1 Must have a version message before anything else");
         // Must have a version message before anything else
         Misbehaving(pfrom->GetId(), 1);
         return false;
@@ -6446,7 +6454,11 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             pfrom->PushMessage("reject", strCommand, state.GetRejectCode(),
                 state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
             if (nDoS > 0)
+            {
+                  LogPrintf(" Misbehaving nDoS ===1");
+  
                 Misbehaving(pfrom->GetId(), nDoS);
+            }
         }
     }
 
@@ -6488,7 +6500,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 int nDoS;
                 if (state.IsInvalid(nDoS)) {
                     if (nDoS > 0)
+                    {
+                    LogPrintf(" Misbehaving nDoS ===1 01");
                         Misbehaving(pfrom->GetId(), nDoS);
+                    }
                     std::string strError = "invalid header received " + header.GetHash().ToString();
                     return error(strError.c_str());
                 }
@@ -6540,7 +6555,12 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
                     if(nDoS > 0) {
                         TRY_LOCK(cs_main, lockMain);
-                        if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
+                        if(lockMain) {
+                            
+                           LogPrintf(" Misbehaving nDoS ===1 02");
+                            Misbehaving(pfrom->GetId(), nDoS);
+                        
+                        }
                     }
                 }
                 //disconnect this node if its old protocol version

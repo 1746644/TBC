@@ -54,7 +54,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    ( 0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
+    ( 0, uint256("0x0000068580dbb15f57582badcdec5ae333db51da25521948f821bd2d57097748"));
     /*
     (0, uint256("0x0000094d510b11b1b902e77b10f793a2b43ad81d1db9884f1ef26c773711965f"))
     (1, uint256("0x00000dd955900a094ae8b426b4b0839ec3af15bc8547932618b7152dc570c66d"))
@@ -64,25 +64,25 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1592010553, // * UNIX timestamp of last checkpoint block
+    1593159614, // * UNIX timestamp of last checkpoint block
     78164,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
-    boost::assign::map_list_of(0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
+    boost::assign::map_list_of(0, uint256("0x0000068580dbb15f57582badcdec5ae333db51da25521948f821bd2d57097748"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1592010553,
+    1593159614,
     0,
     250};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
-    boost::assign::map_list_of(0, uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
+    boost::assign::map_list_of(0, uint256("0x0000068580dbb15f57582badcdec5ae333db51da25521948f821bd2d57097748"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1591583393,
+    1593159614,
     0,
     100};
 
@@ -107,12 +107,12 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x71;
-        pchMessageStart[1] = 0x52;
-        pchMessageStart[2] = 0xe3;
-        pchMessageStart[3] = 0xea;
+        pchMessageStart[0] = 0xc1;
+        pchMessageStart[1] = 0x2a;
+        pchMessageStart[2] = 0x14;
+        pchMessageStart[3] = 0x1a;
         vAlertPubKey = ParseHex("04e10cdf6822c8afeb688529bed34e748cff92bb1ec2a120180580445aaaf24a5c6d698e83f88ebd1cb8dda4e4f58d5ca13f12858dd6397209c0da4c947e26a499");
-        nDefaultPort = 62222;
+        nDefaultPort = 62225;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // TBC starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 21000000;
         nMaxReorganizationDepth = 100;
@@ -132,10 +132,10 @@ public:
 
         /** Height or Time Based Activations **/
      //   nLastPOWBlock = 23600;
-        nLastPOWBlock=200;
+        nLastPOWBlock=500;
         nModifierUpdateBlock = 0;
-        nZerocoinStartHeight = 201;
-        nZerocoinStartTime = 1592018553; // 
+        nZerocoinStartHeight = 501;
+        nZerocoinStartTime = 1593165080; // 
         nBlockEnforceSerialRange = 1; //Enforce serial range starting this block
         nBlockRecalculateAccumulators = INT_MAX; //Trigger a recalculation of accumulators
         nBlockFirstFraudulent = INT_MAX; //First block that bad serials emerged
@@ -152,7 +152,7 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "08:41 13 June 2020, Tong Bao Coin is coming,COVID-19 Confirmed 7,573,699 people Updated Jun 13 at 8:32 AM local";
+        const char* pszTimestamp = "16:19 26 June 2020, Tong Bao Coin is coming ，Updated Jun 26 at 4:12 PM local Confirmed 9,608,814";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -163,18 +163,18 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1592010553;
+        genesis.nTime = 1593164080;
         //genesis.nBits = 0x1e0ffff0;
         genesis.nBits =0x1e0ffff0;
-        genesis.nNonce = 566251;
+        genesis.nNonce = 3047869;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x000002515d7e630ee3ef933816412972559bb3b43975f7ccc1ddab320a82c4d1"));
-        assert(genesis.hashMerkleRoot == uint256("0xff4cf7af5671dfe5bce1d1989ca8686c3518b5eb372caa7335b06af5e3948ea0"));
+        assert(hashGenesisBlock == uint256("0x0000068580dbb15f57582badcdec5ae333db51da25521948f821bd2d57097748"));
+        assert(genesis.hashMerkleRoot == uint256("0x8dd3b386e2a50c07dec90abacb6a910a270151ac70b868d6b927be037a830a0f"));
 
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.tbc.kim"));
         vSeeds.push_back(CDNSSeedData("seed2", "seed2.tbc.kim"));
-        vSeeds.push_back(CDNSSeedData("seed3", "seed2.tbc.kim"));
+        vSeeds.push_back(CDNSSeedData("seed3", "seed3.tbc.kim"));
         vSeeds.push_back(CDNSSeedData("seed4", "seed4.tbc.wiki"));
         vSeeds.push_back(CDNSSeedData("seed5", "seed5.tbc.wiki"));
         vSeeds.push_back(CDNSSeedData("seed6", "seed6.tbc.wiki"));
@@ -242,7 +242,7 @@ public:
         pchMessageStart[2] = 0x67;
         pchMessageStart[3] = 0xb8;
         vAlertPubKey = ParseHex("04081df6111f7d347987706f5b48747f772f11e35d7c523f9b6631952b0328531fab0d14d1310fd40f4b2bb434bd2d4e91cf01f2cfbd8e323e40471272d6afc731");
-        nDefaultPort = 62224;
+        nDefaultPort = 62227;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;

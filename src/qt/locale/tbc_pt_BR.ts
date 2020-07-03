@@ -3494,8 +3494,8 @@ https://www.transifex.com/TBC-project/TBC-project-translations</translation>
         <translation>Você deve especificar uma masternodeprivkey na configuração. Favor verificar o manual para obter ajuda.</translation>
     </message>
     <message>
-        <source>(62222 could be used only on mainnet)</source>
-        <translation>(62222 could be used only on mainnet)</translation>
+        <source>(62225 could be used only on mainnet)</source>
+        <translation>(62225 could be used only on mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3506,8 +3506,8 @@ https://www.transifex.com/TBC-project/TBC-project-translations</translation>
         <translation>(padrão: 1)</translation>
     </message>
     <message>
-        <source>(must be 62222 for mainnet)</source>
-        <translation>(deve ser 62222 para mainnet)</translation>
+        <source>(must be 62225 for mainnet)</source>
+        <translation>(deve ser 62225 para mainnet)</translation>
     </message>
     <message>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>

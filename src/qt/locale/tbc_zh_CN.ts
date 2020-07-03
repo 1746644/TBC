@@ -1772,8 +1772,8 @@ Address: %4
         <translation>新增/编辑通宝币节点</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter an Alias (friendly name) for your Master Node and its address (either clearnet IP and port or Tor onion address and port). The address should be in the format 123.456.789.123:62222 or asdfghjk.onion:62222. You must send exactly 5000 IC to the collateral address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;输入主节点的别名（好记的名字)和地址（既可以是IP和端口,也可以是暗网地址和端口），地址应该是格式123.566.789.123:62222或asdfghjk.onion:62222:62222。抵押地址钱包中应正好有20000个币。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter an Alias (friendly name) for your Master Node and its address (either clearnet IP and port or Tor onion address and port). The address should be in the format 123.456.789.123:62225 or asdfghjk.onion:62225. You must send exactly 2000 IC to the collateral address.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;输入主节点的别名（好记的名字)和地址（既可以是IP和端口,也可以是暗网地址和端口），地址应该是格式123.566.789.123:62225或asdfghjk.onion:62225。抵押地址钱包中应正好有2000+个币。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alias*</source>
@@ -1816,8 +1816,8 @@ Address: %4
         <translation>输入主节点私钥</translation>
     </message>
     <message>
-        <source>Enter 5000 IC TXID</source>
-        <translation>输入有20000个币的TX哈希</translation>
+        <source>Enter 2000 IC TXID</source>
+        <translation>输入有2000个币的TX哈希</translation>
     </message>
     <message>
         <source>Enter transaction output index</source>
@@ -1833,16 +1833,16 @@ Address: %4
         <translation>请输入一个别名</translation>
     </message>
     <message>
-        <source>Please enter an ip address and port. (123.45.67.89:62222)</source>
-        <translation>请输入一个Ip地址和端口，（如123.45.67.89:62222）</translation>
+        <source>Please enter an ip address and port. (123.45.67.89:62225)</source>
+        <translation>请输入一个Ip地址和端口，（如123.45.67.89:62225）</translation>
     </message>
     <message>
         <source>Please enter a masternode private key. This can be found using the \"masternode genkey\" command in the console</source>
         <translation>请输入一个主节点私钥，该参数可在终端下通过\"masternode genkey\"命令获取</translation>
     </message>
     <message>
-        <source>Please enter the transaction hash for the transaction that has 5000 coins</source>
-        <translation>请输入一个交易哈希，该哈希正好还有20000个币</translation>
+        <source>Please enter the transaction hash for the transaction that has 2000 coins</source>
+        <translation>请输入一个交易哈希，该哈希正好还有2000个币</translation>
     </message>
     <message>
         <source>Please enter a transaction output index. This can be found using the \"masternode outputs\" command in the console</source>
@@ -6500,8 +6500,8 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+3"/>
-        <source>(62222 could be used only on mainnet)</source>
-        <translation>(62222 只能在mainnet中使用)</translation>
+        <source>(62225 could be used only on mainnet)</source>
+        <translation>(62225 只能在mainnet中使用)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6515,8 +6515,8 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+1"/>
-        <source>(must be 62222 for mainnet)</source>
-        <translation>(mainnet必须是62222)</translation>
+        <source>(must be 62225 for mainnet)</source>
+        <translation>(mainnet必须是62225)</translation>
     </message>
     <message>
         <location line="+2"/>

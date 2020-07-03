@@ -1884,8 +1884,8 @@ por ejemplo: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
         <translation type="vanished">Debes especificar un masternodeprivkey en la configuración. Por favor mira la documentación por ayuda.</translation>
     </message>
     <message>
-        <source>(62222 could be used only on mainnet)</source>
-        <translation type="vanished">(62222 puede ser utilizado solo en mainnet)</translation>
+        <source>(62225 could be used only on mainnet)</source>
+        <translation type="vanished">(62225 puede ser utilizado solo en mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -1896,8 +1896,8 @@ por ejemplo: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
         <translation type="vanished">(predeterminado: 1)</translation>
     </message>
     <message>
-        <source>(must be 62222 for mainnet)</source>
-        <translation type="vanished">(debe ser 62222 para un mainnet)</translation>
+        <source>(must be 62225 for mainnet)</source>
+        <translation type="vanished">(debe ser 62225 para un mainnet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>
@@ -6146,8 +6146,8 @@ for example: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
         <translation type="unfinished">Debes especificar un masternodeprivkey en la configuración. Por favor mira la documentación por ayuda.</translation>
     </message>
     <message>
-        <source>(62222 could be used only on mainnet)</source>
-        <translation type="unfinished">(62222 puede ser utilizado solo en mainnet)</translation>
+        <source>(62225 could be used only on mainnet)</source>
+        <translation type="unfinished">(62225 puede ser utilizado solo en mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6158,8 +6158,8 @@ for example: alertnotify=echo %%s | mail -s &quot;TBC Alert&quot; admin@foo.com
         <translation type="unfinished">(predeterminado: 1)</translation>
     </message>
     <message>
-        <source>(must be 62222 for mainnet)</source>
-        <translation type="unfinished">(debe ser 62222 para un mainnet)</translation>
+        <source>(must be 62225 for mainnet)</source>
+        <translation type="unfinished">(debe ser 62225 para un mainnet)</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

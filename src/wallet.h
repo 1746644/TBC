@@ -289,7 +289,7 @@ public:
 
         // Stake Settings
         nHashDrift = 45;
-        nStakeSplitThreshold = 5000;
+        nStakeSplitThreshold = 20000;
         nHashInterval = 22;
         nStakeSetUpdateTime = 300; // 5 minutes
 
@@ -1040,8 +1040,8 @@ public:
     int Priority() const
     {
         BOOST_FOREACH (CAmount d, obfuScationDenominations)
-            if (tx->vout[i].nValue == d) return 10000;
-        if (tx->vout[i].nValue < 1 * COIN) return 5000;
+            if (tx->vout[i].nValue == d) return 1000;
+        if (tx->vout[i].nValue < 1 * COIN) return 2000;
 
         //nondenom return largest first
         return -(tx->vout[i].nValue / COIN);

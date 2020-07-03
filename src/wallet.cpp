@@ -1098,7 +1098,7 @@ CAmount CWalletTx::GetAnonymizableCredit(bool fUseCache) const
         const CTxIn vin = CTxIn(hashTx, i);
 
         if (pwallet->IsSpent(hashTx, i) || pwallet->IsLockedCoin(hashTx, i)) continue;
-        if (fMasterNode && vout[i].nValue == 5000 * COIN) continue; // do not count MN-like outputs
+        if (fMasterNode && vout[i].nValue == 2000 * COIN) continue; // do not count MN-like outputs
 
         const int rounds = pwallet->GetInputObfuscationRounds(vin);
         if (rounds >= -2 && rounds < nZeromintPercentage) {
@@ -1162,7 +1162,7 @@ CAmount CWalletTx::GetUnlockedCredit() const
         const CTxOut& txout = vout[i];
 
         if (pwallet->IsSpent(hashTx, i) || pwallet->IsLockedCoin(hashTx, i)) continue;
-        if (fMasterNode && vout[i].nValue == 5000 * COIN) continue; // do not count MN-like outputs
+        if (fMasterNode && vout[i].nValue == 2000 * COIN) continue; // do not count MN-like outputs
 
         nCredit += pwallet->GetCredit(txout, ISMINE_SPENDABLE);
         if (!MoneyRange(nCredit))
@@ -1196,7 +1196,7 @@ CAmount CWalletTx::GetLockedCredit() const
         }
 
         // Add masternode collaterals which are handled likc locked coins
-        // if (fMasterNode && vout[i].nValue == 5000 * COIN) {
+        // if (fMasterNode && vout[i].nValue == 2000 * COIN) {
         //     nCredit += pwallet->GetCredit(txout, ISMINE_SPENDABLE);
         // }
 
@@ -1314,7 +1314,7 @@ CAmount CWalletTx::GetLockedWatchOnlyCredit() const
         }
 
         // Add masternode collaterals which are handled likc locked coins
-        else if (fMasterNode && vout[i].nValue == 5000 * COIN) {
+        else if (fMasterNode && vout[i].nValue == 2000 * COIN) {
             nCredit += pwallet->GetCredit(txout, ISMINE_WATCH_ONLY);
         }
 
@@ -1952,13 +1952,13 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
                 if (nCoinType == ONLY_DENOMINATED) {
                     found = IsDenominatedAmount(pcoin->vout[i].nValue);
                 } else if (nCoinType == ONLY_NOT10000IFMN) {
-                    found = !(fMasterNode && pcoin->vout[i].nValue == 5000 * COIN);
+                    found = !(fMasterNode && pcoin->vout[i].nValue == 2000 * COIN);
                 } else if (nCoinType == ONLY_NONDENOMINATED_NOT10000IFMN) {
                     if (IsCollateralAmount(pcoin->vout[i].nValue)) continue; // do not use collateral amounts
                     found = !IsDenominatedAmount(pcoin->vout[i].nValue);
-                    if (found && fMasterNode) found = pcoin->vout[i].nValue != 5000 * COIN; // do not use Hot MN funds
+                    if (found && fMasterNode) found = pcoin->vout[i].nValue != 2000 * COIN; // do not use Hot MN funds
                 } else if (nCoinType == ONLY_10000) {
-                    found = pcoin->vout[i].nValue == 5000 * COIN;
+                    found = pcoin->vout[i].nValue == 2000 * COIN;
                 } else {
                     found = true;
                 }
@@ -2427,7 +2427,7 @@ bool CWallet::SelectCoinsDark(CAmount nValueMin, CAmount nValueMax, std::vector<
         if (out.tx->vout[out.i].nValue < CENT) continue;
         //do not allow collaterals to be selected
         if (IsCollateralAmount(out.tx->vout[out.i].nValue)) continue;
-        if (fMasterNode && out.tx->vout[out.i].nValue == 5000 * COIN) continue; //masternode input
+        if (fMasterNode && out.tx->vout[out.i].nValue == 2000 * COIN) continue; //masternode input
 
         if (nValueRet + out.tx->vout[out.i].nValue <= nValueMax) {
             CTxIn vin = CTxIn(out.tx->GetHash(), out.i);
@@ -2701,9 +2701,9 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
                     if (coin_type == ALL_COINS) {
                         strFailReason = _("Insufficient funds.");
                     } else if (coin_type == ONLY_NOT10000IFMN) {
-                        strFailReason = _("Unable to locate enough funds for this transaction that are not equal 5000 TBC.");
+                        strFailReason = _("Unable to locate enough funds for this transaction that are not equal 2000 TBC.");
                     } else if (coin_type == ONLY_NONDENOMINATED_NOT10000IFMN) {
-                        strFailReason = _("Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 5000 TBC.");
+                        strFailReason = _("Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 2000 TBC.");
                     } else {
                         strFailReason = _("Unable to locate enough Obfuscation denominated funds for this transaction.");
                         strFailReason += " " + _("Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.");
@@ -2868,7 +2868,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // The following split & combine thresholds are important to security
     // Should not be adjusted if you don't understand the consequences
     //int64_t nCombineThreshold = 0;
-
+   //    LogPrintf("CreateCoinStake 01\n");
     txNew.vin.clear();
     txNew.vout.clear();
 
@@ -2879,13 +2879,16 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     // Choose coins to use
     CAmount nBalance = GetBalance();
-
+  // LogPrintf("CreateCoinStake 02\n");
     if (mapArgs.count("-reservebalance") && !ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
         return error("CreateCoinStake : invalid reserve balance amount");
 
     if (nBalance <= nReserveBalance)
+    {
+          //     LogPrintf("CreateCoinStake 02 RET\n");
         return false;
-
+    }
+ //  LogPrintf("CreateCoinStake 03\n");
     // presstab HyperStake - Initialize as static and don't update the set on every run of CreateCoinStake() in order to lighten resource use
     static std::set<pair<const CWalletTx*, unsigned int> > setStakeCoins;
     static int nLastStakeSetUpdate = 0;
@@ -2893,23 +2896,30 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (GetTime() - nLastStakeSetUpdate > nStakeSetUpdateTime) {
         setStakeCoins.clear();
         if (!SelectStakeCoins(setStakeCoins, nBalance - nReserveBalance))
+        {
+            //         LogPrintf("CreateCoinStake 03 RET\n");
             return false;
+        }
 
         nLastStakeSetUpdate = GetTime();
     }
-
+ //  LogPrintf("CreateCoinStake 04\n");
     if (setStakeCoins.empty())
-        return false;
-
+    {
+                   //    LogPrintf("CreateCoinStake 04 RET\n");
+                         return false;
+    }
+      
+   //LogPrintf("CreateCoinStake 05\n");
     vector<const CWalletTx*> vwtxPrev;
 
     CAmount nCredit = 0;
     CScript scriptPubKeyKernel;
-
+ //LogPrintf("CreateCoinStake 06\n");
     //prevent staking a time that won't be accepted
     if (GetAdjustedTime() <= chainActive.Tip()->nTime)
         MilliSleep(10000);
-
+ //LogPrintf("CreateCoinStake 07\n");
     BOOST_FOREACH (PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setStakeCoins) {
         //make sure that enough time has elapsed between
         CBlockIndex* pindex = NULL;
@@ -2918,10 +2928,10 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             pindex = it->second;
         else {
             if (fDebug)
-                LogPrintf("CreateCoinStake() failed to find block index \n");
+             //   LogPrintf("CreateCoinStake() failed to find block index \n");
             continue;
         }
-
+ //LogPrintf("CreateCoinStake 08\n");
         // Read block header
         CBlockHeader block = pindex->GetBlockHeader();
 
@@ -2934,14 +2944,14 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (CheckStakeKernelHash(nBits, block, *pcoin.first, prevoutStake, nTxNewTime, nHashDrift, false, hashProofOfStake, true)) {
             //Double check that this will pass time requirements
             if (nTxNewTime <= chainActive.Tip()->GetMedianTimePast()) {
-                LogPrintf("CreateCoinStake() : kernel found, but it is too far in the past, nTxNewTime=%d, MedianTimePast=%d \n", nTxNewTime, chainActive.Tip()->GetMedianTimePast());
+             //   LogPrintf("CreateCoinStake() : kernel found, but it is too far in the past, nTxNewTime=%d, MedianTimePast=%d \n", nTxNewTime, chainActive.Tip()->GetMedianTimePast());
                 continue;
             }
-
+ //LogPrintf("CreateCoinStake 09\n");
             // Found a kernel
             if (fDebug && GetBoolArg("-printcoinstake", false))
                 LogPrintf("CreateCoinStake : kernel found\n");
-
+ //LogPrintf("CreateCoinStake 10\n");
             vector<valtype> vSolutions;
             txnouttype whichType;
             CScript scriptPubKeyOut;
@@ -2970,7 +2980,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 scriptPubKeyOut << key.GetPubKey() << OP_CHECKSIG;
             } else
                 scriptPubKeyOut = scriptPubKeyKernel;
-
+ //LogPrintf("CreateCoinStake 11\n");
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
             nCredit += pcoin.first->vout[pcoin.second].nValue;
             vwtxPrev.push_back(pcoin.first);
@@ -2979,7 +2989,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             //presstab HyperStake - calculate the total size of our new output including the stake reward so that we can use it to decide whether to split the stake outputs
             const CBlockIndex* pIndex0 = chainActive.Tip();
             uint64_t nTotalSize = pcoin.first->vout[pcoin.second].nValue + GetBlockValue(pIndex0->nHeight);
-
+ //LogPrintf("CreateCoinStake 12\n");
             //presstab HyperStake - if MultiSend is set to send in coinstake we will add our outputs here (values asigned further down)
             if (nTotalSize / 2 > nStakeSplitThreshold * COIN)
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
@@ -2992,24 +3002,26 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (fKernelFound)
             break; // if kernel is found stop searching
     }
+     //LogPrintf("CreateCoinStake 13\n");
     if (nCredit == 0 || nCredit > nBalance - nReserveBalance)
         return false;
-
+// LogPrintf("CreateCoinStake 14\n");
     // Calculate reward
     CAmount nReward;
     const CBlockIndex* pIndex0 = chainActive.Tip();
     nReward = GetBlockValue(pIndex0->nHeight);
     nCredit += nReward;
-
+ //LogPrintf("CreateCoinStake 15\n");
     CAmount nMinFee = 0;
     while (true) {
+      //   LogPrintf("CreateCoinStake 16\n");
         // Set output amount
         if (txNew.vout.size() == 3) {
             txNew.vout[1].nValue = ((nCredit - nMinFee) / 2 / CENT) * CENT;
             txNew.vout[2].nValue = nCredit - nMinFee - txNew.vout[1].nValue;
         } else
             txNew.vout[1].nValue = nCredit - nMinFee;
-
+         //LogPrintf("CreateCoinStake 17\n");
         // Limit size
         unsigned int nBytes = ::GetSerializeSize(txNew, SER_NETWORK, PROTOCOL_VERSION);
         if (nBytes >= DEFAULT_BLOCK_MAX_SIZE / 5)
@@ -3027,7 +3039,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             break;
         }
     }
-
+        // LogPrintf("CreateCoinStake 18\n");
     //Masternode payment
     FillBlockPayee(txNew, nMinFee, true);
 
@@ -3037,7 +3049,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (!SignSignature(*this, *pcoin, txNew, nIn++))
             return error("CreateCoinStake : failed to sign coinstake");
     }
-
+       // LogPrintf("CreateCoinStake 19\n");
     // Successfully generated coinstake
     nLastStakeSetUpdate = 0; //this will trigger stake set to repopulate next round
     return true;
